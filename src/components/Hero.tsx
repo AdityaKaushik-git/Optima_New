@@ -28,7 +28,7 @@ export default function Hero() {
     <section ref={ref} className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-white">
       <motion.div aria-hidden className="absolute inset-0 -z-10" style={{ y }}>
         <motion.div className="h-full w-full" initial={{ clipPath: 'inset(8% 8% 8% 8%)', scale: 1.12 }} animate={{ clipPath: 'inset(0% 0% 0% 0%)', scale: 1 }} transition={{ duration: 1.8, ease }}>
-          <Img src="images/site/sbs-torch-applied.webp" small priority alt="" className="h-full w-full object-cover object-[60%_50%]" />
+          <img src="https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=100&w=3840&auto=format&fit=crop" alt="" className="h-full w-full object-cover object-[50%_50%]" />
         </motion.div>
         <div className="absolute inset-0 bg-[linear-gradient(100deg,rgb(10_26_46/0.96)_0%,rgb(10_26_46/0.82)_45%,rgb(10_26_46/0.35)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink to-transparent" />
