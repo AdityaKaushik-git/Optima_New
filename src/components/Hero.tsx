@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Phone } from 'lucide-react';
-import { Button, Img } from './ui';
+import { Button } from './ui';
 import { primaryPhone } from '../data/company';
 import { trustBar } from '../data/content';
 
