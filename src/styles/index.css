@@ -1,0 +1,166 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   Design tokens
+   Palette is taken from the Optima Star logo: navy #132D4C and cyan #00AEE7.
+   Light, cool-white pages; deep navy reserved for the hero, the technical
+   diagram, the warranty statement and the footer.
+   ============================================================ */
+@theme {
+  --color-ink: #0a1a2e;
+  --color-navy: #132d4c;
+  --color-navy-700: #1b3d63;
+  --color-blue: #1570b8;
+  --color-aqua: #00aee7;
+  --color-aqua-soft: #cdeefa;
+  --color-paper: #f5f8fb;
+  --color-mist: #e6eef5;
+  --color-line: #d4dfe9;
+  --color-steel: #5d6e80;
+  --color-graphite: #25303c;
+  --color-success: #1f8a5b;
+  --color-warn: #b7791f;
+  --color-danger: #c0392b;
+
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-display: clamp(2.6rem, 1.4rem + 5.2vw, 6.2rem);
+  --text-h1: clamp(2.2rem, 1.5rem + 3vw, 4rem);
+  --text-h2: clamp(1.8rem, 1.3rem + 2vw, 3rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-card: 0.9rem;
+}
+
+:root {
+  /* Diagram material colours (semantic, used by the cross-section and swatches) */
+  --c-water: #1aa7de;
+  --c-soil: #d9d2c3;
+  --c-grout: #8a7a2e;
+  --c-block: #9aa6b2;
+  --c-blinding: #5c6670;
+  --c-primer: #c98a2b;
+  --c-membrane: #15171b;
+  --c-protect: #7fa0bd;
+  --c-concrete: #c9ced4;
+
+  --header-h: 4.5rem;
+  --mobile-bar-h: 4rem;
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+  }
+  body {
+    @apply bg-white text-graphite font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-navy;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-aqua-soft); color: var(--color-ink); }
+  :focus-visible {
+    outline: 2px solid var(--color-aqua);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  img { max-width: 100%; height: auto; }
+  button { cursor: pointer; }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+  .section-y { padding-block: clamp(4.5rem, 9vw, 8.5rem); }
+
+  /* Drawing-style annotation label. Uppercase is used only here, because it mirrors
+     the lettering on the company's own construction drawings. */
+  .anno {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .lede { @apply text-lg text-steel; max-width: 62ch; line-height: 1.7; }
+  .on-dark .lede { color: rgb(255 255 255 / 0.72); }
+
+  /* Blueprint grid used on dark technical surfaces */
+  .blueprint {
+    background-color: var(--color-ink);
+    background-image:
+      linear-gradient(rgb(0 174 231 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(0 174 231 / 0.07) 1px, transparent 1px),
+      linear-gradient(rgb(0 174 231 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(0 174 231 / 0.035) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  }
+  .paper-grid {
+    background-color: var(--color-paper);
+    background-image:
+      linear-gradient(rgb(19 45 76 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(19 45 76 / 0.045) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .link-u {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s var(--ease-out-expo);
+  }
+  .link-u:hover, .link-u:focus-visible { background-size: 100% 1px; }
+
+  .field {
+    @apply w-full rounded-lg border border-line bg-white px-4 py-3 text-base text-ink transition;
+    min-height: 3rem;
+  }
+  .field:focus { outline: none; border-color: var(--color-aqua); box-shadow: 0 0 0 4px rgb(0 174 231 / 0.15); }
+  .field[aria-invalid='true'] { border-color: var(--color-danger); }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Membrane texture used behind the warranty statement */
+.membrane-texture {
+  background-image:
+    repeating-linear-gradient(115deg, rgb(255 255 255 / 0.025) 0 2px, transparent 2px 7px),
+    radial-gradient(circle at 20% 30%, rgb(0 174 231 / 0.12), transparent 55%);
+}
+
+@keyframes wave-drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.wave-drift { animation: wave-drift 9s linear infinite; }
+
+@keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+@media (max-width: 1023px) {
+  body { padding-bottom: calc(var(--mobile-bar-h) + env(safe-area-inset-bottom)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
